@@ -22,23 +22,43 @@
       background-color: #000;
       padding: 10px 20px;
       border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
       display: inline-block;
       margin-bottom: 20px;
       position: relative;
+      animation: fadeIn 1s ease-in-out, pulseBackground 1.5s infinite alternate ease-in-out;
     }
+
+    /* Медленная пульсация */
+    @keyframes pulseBackground {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
     .black-friday-banner h1 {
       font-size: 28px;
       margin: 0;
       color: white;
       text-transform: uppercase;
+      position: relative;
+      display: inline-block;
     }
-    .black-friday-banner .red-bar {
+
+    /* Красная полоска под текстом */
+    .black-friday-banner h1::after {
+      content: "";
+      display: block;
       width: 100%;
-      height: 5px;
+      height: 4px;
       background-color: #ff4444;
-      margin-top: 5px;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
     }
+
     .content {
       background: #222;
       padding: 20px;
@@ -47,16 +67,20 @@
       text-align: center;
       max-width: 500px;
       width: 90%;
+      opacity: 0;
+      animation: slideIn 1s ease-in-out forwards 0.5s, redGlow 1.5s infinite alternate ease-in-out;
     }
-    .content h2 {
-      margin-top: 0;
-      font-size: 22px;
+
+    /* Анимация динамической подсветки красным */
+    @keyframes redGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      }
     }
-    .content p {
-      font-size: 18px;
-      color: #ddd;
-      margin: 10px auto;
-    }
+
     .button {
       display: inline-block;
       margin-top: 20px;
@@ -67,27 +91,64 @@
       text-decoration: none;
       border-radius: 5px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      animation: pulseButton 2s infinite alternate ease-in-out; /* Добавленная анимация пульсации */
     }
     .button:hover {
       background-color: #ff2222;
+    }
+    .button:active {
+      box-shadow: 0 0 15px #ff4444, 0 0 25px #ff2222;
+    }
+
+    /* Анимация пульсации кнопки */
+    @keyframes pulseButton {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
     }
 
     .finger {
       font-size: 50px;
       position: absolute;
       top: 20px;
-      right: 0px; /* Подвинул немного вправо */
+      right: 10px;
       color: #ff4444;
       animation: moveFinger 0.6s infinite alternate ease-in-out;
     }
 
+    /* Анимация приближения и отдаления пальца */
     @keyframes moveFinger {
       0% {
-        transform: translateX(5px) scale(1);
+        transform: scale(1);
       }
       100% {
-        transform: translateX(15px) scale(1.1);
+        transform: scale(1.2);
+      }
+    }
+
+    /* Анимация появления баннера */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Анимация выезда контейнера */
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
       }
     }
 
@@ -97,6 +158,23 @@
       border-radius: 50%;
       display: block;
       margin: 0 auto 10px;
+      animation: photoGlow 1.5s infinite alternate;
+    }
+
+    /* Анимация подсветки фотографии */
+    @keyframes photoGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      }
+    }
+
+    /* Увеличение текста инструкции */
+    .instruction-text {
+      font-size: 22px; /* Можно настроить по необходимости */
+      line-height: 1.6; /* Для лучшего восприятия */
     }
   </style>
 </head>
@@ -108,7 +186,7 @@
 </div>
 <div class="content">
   <h2>Інструкція</h2>
-  <p>Щоб замовити натискай на три крапки (…) зверху праворуч👆(стрілочка вказує, де).
+  <p class="instruction-text">Щоб замовити натискайте на три крапки (…) зверху праворуч👆(стрілочка вказує, де).
     Натискаєте та обираєте «Відкрити у браузері» 📝.
     Потім «ЗАМОВИТИ», та «ПРИЄДНАТИСЯ», і наш менеджер звʼяжеться з вами на протязі хвилини.😉</p>
   <a href="https://t.me/+qWgchN9-LBs1MzBi" class="button">Замовити</a>
@@ -116,5 +194,4 @@
 <div class="finger">👆</div>
 </body>
 </html>
-
 
