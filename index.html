@@ -167,11 +167,35 @@
       font-size: 22px;
       line-height: 1.6;
     }
+
+    /* Стили для стрелки вверх */
+    .arrow-up {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: #E67E22;
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      font-size: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .arrow-up:hover {
+      background-color: #D35400;
+      box-shadow: 0 0 15px #E67E22, 0 0 25px #D35400;
+    }
   </style>
 </head>
 <body>
 <div class="black-friday-banner">
-  <img src="newLogoForTraffi.jpg" alt="Аватар" class="avatar">
+  <img src="newAvatar.jpg" alt="Аватар" class="avatar">
   <h1>Розпродаж товару</h1>
   <div class="red-bar"></div>
 </div>
@@ -183,7 +207,25 @@
   <a href="https://t.me/+ckiwGKJp9l5hYjcy" class="button">Замовити</a>
 </div>
 <div class="finger">👆</div>
+
+<div class="arrow-up" onclick="scrollToTop()">▲</div>
+
+<script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+    const arrow = document.querySelector('.arrow-up');
+    if (window.scrollY > 100) {
+      arrow.style.display = 'block';
+    } else {
+      arrow.style.display = 'none';
+    }
+  });
+
+  window.dispatchEvent(new Event('scroll'));
+</script>
+
 </body>
 </html>
-
-
